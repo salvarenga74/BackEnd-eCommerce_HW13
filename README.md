@@ -6,17 +6,13 @@
 
 ## Description
 
-In this application I created a Node.js command-line application that can be used to create a HTML website that displays the basic information of every employee that was entered by the user. The application was built without significant starter code and assumes that the first team member of the work team will be a manager. From there the user will be prompted until all the members of the team has been added.
+In this application I created a the back end for an e-commerce site by modifying starter code. I accomplished this by configuring a working Express.js API to use Sequelize to interact with a MySQL database. This type of Object-Relational Mapping (ORM) is essential to any e-commerce and is now generating an estimated $29 trillion in 2019.
 
-This application also includes testing parameters for each employee and will ensure proper information is being inputted into the respective fields.
+This application takes advantage of an added database, MySQL username and password inside of an environment variable file. I also connected to the created database through Sequelize that allowed me to enter schema and seed commands.
 
-See Deployed Application: [Note Taker Dashboard](https://gentle-sea-38975.herokuapp.com/)
+The following video shows an example of my application being used from the command line:
 
-<img src="./public/assets/images/App Launch Page.png" alt="Screen grab of the launch page"/>
-
-<img src="./public/assets/images/Notes Page.png" alt="Screen grab of the current notes list"/>
-
-<img src="./public/assets/images/API Endpoint.png" alt="Screen grab of the current notes api end point with unique ID"/>
+[![A video thumbnail shows the command-line e-commerce with a play button overlaying the view.](./assets/videoThumbnail.png)](https://drive.google.com/file/d/1KhMQyNSBvJSzy8oume-1VNLFRL-G9T4K/view?usp=sharing)
 
 <summary>Table of Contents</summary>
   <ol>
