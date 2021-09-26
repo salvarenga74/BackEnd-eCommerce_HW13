@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
   Product.findAll({
-    include: [{ model: Category, Tag, through: ProductTag }],
+    include: [Category, { model: Tag, through: ProductTag }],
   })
     .then((products) => res.status(200).json(products))
     .catch((err) => res.status(500).json(err));
@@ -25,7 +25,6 @@ router.get("/:id", (req, res) => {
     include: [
       {
         model: Category,
-        through: ProductTag,
       },
     ],
   })
@@ -68,11 +67,19 @@ router.post("/", (req, res) => {
 // update product
 router.put("/:id", (req, res) => {
   // update product data
-  Product.update(req.body, {
-    where: {
-      id: req.params.id,
+  Product.update(
+    {
+      product_name: req.body.product_name,
+      price: req.body.price,
+      stock: req.body.stock,
+      tagIds: req.body.tagIds,
     },
-  })
+    {
+      where: {
+        id: req.params.id,
+      },
+    }
+  )
     .then((product) => {
       // find all associated tags from ProductTag
       return ProductTag.findAll({ where: { product_id: req.params.id } });
@@ -100,7 +107,9 @@ router.put("/:id", (req, res) => {
         ProductTag.bulkCreate(newProductTags),
       ]);
     })
-    .then((updatedProductTags) => res.json(updatedProductTags))
+    .then((updatedProductTags) => {
+      res.json(updatedProductTags);
+    })
     .catch((err) => {
       // console.log(err);
       res.status(400).json(err);
@@ -109,6 +118,13 @@ router.put("/:id", (req, res) => {
 
 router.delete("/:id", (req, res) => {
   // delete one product by its `id` value
+  Product.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((tag) => res.status(200).json(tag))
+    .catch((err) => res.status(500).json(err));
 });
 
 module.exports = router;
